@@ -1,0 +1,297 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --espresso: #491f00;
+    --peach: #ffe2b5;
+    --cream: #fdf6ec;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+  }
+
+  body {
+    background-color: var(--peach);
+    color: var(--espresso);
+    font-family: 'DM Sans', system-ui, sans-serif;
+    cursor: auto;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background-color: #491f00;
+    color: #ffe2b5;
+  }
+
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #ffe2b5;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #491f00;
+    border-radius: 2px;
+  }
+}
+
+@layer components {
+  .cursor {
+    position: fixed;
+    width: 12px;
+    height: 12px;
+    background: #491f00;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: all 0.1s ease;
+    mix-blend-mode: multiply;
+  }
+
+  .cursor-follower {
+    position: fixed;
+    width: 36px;
+    height: 36px;
+    border: 1.5px solid #491f00;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: all 0.25s ease;
+    opacity: 0.5;
+  }
+
+  .section-label {
+    @apply font-mono text-xs tracking-[0.25em] uppercase text-espresso/50 mb-3;
+  }
+
+  .section-title {
+    @apply font-display text-4xl md:text-5xl text-espresso font-semibold leading-tight;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center gap-2 px-6 py-3 bg-espresso text-peach font-body font-medium rounded-full text-sm tracking-wide transition-all duration-300 hover:bg-espresso-light hover:scale-105 hover:shadow-lg;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center gap-2 px-6 py-3 border border-espresso text-espresso font-body font-medium rounded-full text-sm tracking-wide transition-all duration-300 hover:bg-espresso hover:text-peach hover:scale-105;
+  }
+
+  .card {
+    @apply bg-cream rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500;
+  }
+
+  .nav-link {
+    @apply font-body text-sm tracking-[0.1em] uppercase text-espresso/70 hover:text-espresso transition-colors duration-200 relative;
+  }
+
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: #491f00;
+    transition: width 0.3s ease;
+  }
+
+  .nav-link:hover::after {
+    width: 100%;
+  }
+}
+
+/* Loading screen */
+.loader-logo {
+  animation: breathe 2s ease-in-out infinite;
+}
+
+@keyframes breathe {
+
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: scale(0.97);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.03);
+  }
+}
+
+/* Grain texture overlay */
+.grain::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9997;
+  opacity: 0.03;
+}
+
+/* Scroll progress bar */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  background: #491f00;
+  z-index: 9996;
+  transition: width 0.1s linear;
+}
+
+/* Masonry layout */
+.masonry-grid {
+  display: flex;
+  margin-left: -16px;
+  width: auto;
+}
+
+.masonry-grid-column {
+  padding-left: 16px;
+  background-clip: padding-box;
+}
+
+.masonry-grid-column>div {
+  margin-bottom: 16px;
+}
+
+/* Lightbox */
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(73, 31, 0, 0.95);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Sound toggle */
+.sound-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 9000;
+  width: 44px;
+  height: 44px;
+  background: #491f00;
+  color: #ffe2b5;
+  border: none;
+  border-radius: 50%;
+  cursor: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.sound-btn:hover {
+  transform: scale(1.1);
+  background: #6b3000;
+}
+
+/* Easter egg styles */
+.konami-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 20000;
+  pointer-events: none;
+  background: transparent;
+}
+
+/* Marquee */
+.marquee-wrapper {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.marquee-inner {
+  display: inline-flex;
+  animation: marquee 20s linear infinite;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* PDF Viewer */
+.pdf-container {
+  max-height: 80vh;
+  overflow-y: auto;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* Comic flip card */
+.comic-card {
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: auto;
+}
+
+.comic-card:hover {
+  transform: rotateY(180deg);
+}
+
+.comic-front,
+.comic-back {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.comic-back {
+  transform: rotateY(180deg);
+  background: #491f00;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: #ffe2b5;
+  padding: 24px;
+}
+
+/* Hover image reveal */
+.img-hover {
+  overflow: hidden;
+}
+
+.img-hover img {
+  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.img-hover:hover img {
+  transform: scale(1.08);
+}
+
+/* Section divider */
+.divider {
+  width: 60px;
+  height: 1px;
+  background: #491f00;
+  opacity: 0.3;
+  margin: 0 auto;
+}
