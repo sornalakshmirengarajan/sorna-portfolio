@@ -55,7 +55,8 @@ export const digitalWorks = [
 ]
 
 // Comic PDF
-export const comicPDF = '/assets/digital/wheres-my-roar.pdf'
+// export const comicPDF = '/assets/digital/wheres-my-roar.pdf'
+export const comicPDF = 'https://drive.google.com/file/d/1CqZ5tKSfnS-xaRwfSDqzCLmqP2j1cl3V/preview'
 
 // Photographs — 19 images
 export const photographs = [
